@@ -1,8 +1,8 @@
-let [milliseconds, seconds, minutes, hours] = [0, 55, 0, 0];
+let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
 let timerRef = document.querySelector(".timer-display");
 let int = null;
 
-document.getElementById("start-timer").addEventListener("click", () => {
+document.getElementById("start-timer").addEventListener("click" , () => {
   if (int !== null) {
     clearInterval(int);
   }
@@ -33,3 +33,26 @@ document.getElementById("reset-timer").addEventListener("click", () => {
   [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
   timerRef.innerHTML = "00 : 00 : 00 : 000";
 });
+
+document.addEventListener("keydown", e => { if (e.key.toLowerCase() === "s") { toStart() } });
+document.addEventListener("keydown", e => { if (e.key.toLowerCase() === "p") { toPause() } });
+document.addEventListener("keydown", e => { if (e.key.toLowerCase() === "r") { toReset() } });
+
+function toStart(){
+    if (int !== null) {
+      clearInterval(int);
+    }
+    int = setInterval(displayTimer, 10);
+}
+
+function toPause(){
+  clearInterval(int);
+}
+
+function toReset(){
+  clearInterval(int);
+  [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+  timerRef.innerHTML = "00 : 00 : 00 : 000";
+}
+
+
