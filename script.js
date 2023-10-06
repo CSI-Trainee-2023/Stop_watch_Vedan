@@ -1,4 +1,4 @@
-let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+let [milliseconds, seconds, minutes, hours] = [0, 55, 0, 0];
 let timerRef = document.querySelector(".timer-display");
 let int = null;
 
@@ -12,8 +12,8 @@ document.getElementById("start-timer").addEventListener("click", () => {
 function displayTimer() {
   milliseconds += 10;
   seconds = milliseconds == 1000 ? (seconds + 1) % 60 : seconds;
-  minutes = seconds == 0 && milliseconds == 0 ? (minutes + 1) % 60 : minutes;
-  hours = minutes == 0 && seconds == 0 && milliseconds == 0 ? hours + 1 : hours;
+  minutes = seconds == 59 && milliseconds == 1000 ? (minutes + 1) % 60 : minutes;
+  hours = minutes == 59 && seconds == 59 && milliseconds == 0 ? hours + 1 : hours;
   milliseconds = milliseconds == 1000 ? 0 : milliseconds;
 
   let h = String(hours).padStart(2, "0");
